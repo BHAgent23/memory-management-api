@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: memory-management-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_server.py
+    envVars:
+      - key: MONGODB_URL
+        sync: false
+      - key: MEMORY_API_KEYS
+        sync: false
+      - key: MEMORY_DB_NAME
+        value: gurukul
+      - key: MEMORY_RETENTION_DAYS
+        value: "365"
+      - key: MEMORY_API_HOST
+        value: "0.0.0.0"
+      - key: MEMORY_API_WORKERS
+        value: "1"
+      - key: MEMORY_API_RELOAD
+        value: "false"
+    healthCheckPath: /memory/health
